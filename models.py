@@ -115,12 +115,12 @@ class LabelEstimator(torch.nn.Module):
             
             # initialize observed positive labels:
             init_logit_pos = inverse_sigmoid(0.995)
-            idx_pos = torch.from_numpy((observed_label_matrix == 1).astype(np.bool))
+            idx_pos = torch.from_numpy((observed_label_matrix == 1).astype(bool))
             param_mtx[idx_pos] = init_logit_pos
             
             # initialize observed negative labels:
             init_logit_neg = inverse_sigmoid(0.005)
-            idx_neg = torch.from_numpy((observed_label_matrix == -1).astype(np.bool))
+            idx_neg = torch.from_numpy((observed_label_matrix == -1).astype(bool))
             param_mtx[idx_neg] = init_logit_neg
         else:
             param_mtx = inverse_sigmoid(torch.FloatTensor(estimated_labels))

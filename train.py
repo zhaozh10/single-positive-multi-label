@@ -257,14 +257,14 @@ if __name__ == '__main__':
     P = {}
     
     # Top-level parameters:
-    P['dataset'] = 'nuswide' # pascal, coco, nuswide, cub
-    P['loss'] = 'role' # bce, bce_ls, iun, iu, pr, an, an_ls, wan, epr, role
-    P['train_mode'] = 'linear_init' # linear_fixed_features, end_to_end, linear_init
+    P['dataset'] = 'cub' # pascal, coco, nuswide, cub
+    P['loss'] = 'an_ls' # bce, bce_ls, iun, iu, pr, an, an_ls, wan, epr, role
+    P['train_mode'] = 'end_to_end' # linear_fixed_features, end_to_end, linear_init
     P['val_set_variant'] = 'clean' # clean, observed
     
     # Paths and filenames:
     P['experiment_name'] = 'multi_label_experiment'
-    P['load_path'] = './data'
+    P['load_path'] = '../data'
     P['save_path'] = './results'
 
     # Optimization parameters:
@@ -321,7 +321,7 @@ if __name__ == '__main__':
     best_params = None
     best_lr = None
     best_bsize = None
-    best_val_score = - np.Inf
+    best_val_score = - np.inf
     best_test_score = None
     now_str = datetime.datetime.now().strftime("%Y_%m_%d_%X").replace(':','-')
     if P['train_mode'] == 'linear_init':

@@ -29,8 +29,8 @@ def get_metadata(dataset_name):
     elif dataset_name == 'cub':
         meta = {
             'num_classes': 312,
-            'path_to_dataset': 'data/cub',
-            'path_to_images': 'data/cub/CUB_200_2011/CUB_200_2011/images'
+            'path_to_dataset': '../data/cub',
+            'path_to_images': '../data/cub/CUB_200_2011/CUB_200_2011/images'
         }
     else:
         raise NotImplementedError('Metadata dictionary not implemented.')
@@ -136,9 +136,13 @@ def load_data(base_path, P):
     data = {}
     for phase in ['train', 'val']:
         data[phase] = {}
-        data[phase]['labels'] = np.load(os.path.join(base_path, 'formatted_{}_labels.npy'.format(phase)))
-        data[phase]['labels_obs'] = np.load(os.path.join(base_path, 'formatted_{}_labels_obs.npy'.format(phase)))
-        data[phase]['images'] = np.load(os.path.join(base_path, 'formatted_{}_images.npy'.format(phase)))
+        # data[phase]['labels'] = np.load(os.path.join(base_path, 'formatted_{}_labels.npy'.format(phase)))
+        # data[phase]['labels_obs'] = np.load(os.path.join(base_path, 'formatted_{}_labels_obs.npy'.format(phase)))
+
+        data[phase]['labels'] = np.load(os.path.join(f"./data/{P['dataset']}", 'formatted_{}_labels.npy'.format(phase)))
+        data[phase]['labels_obs'] = np.load(os.path.join(f"./data/{P['dataset']}", 'formatted_{}_labels_obs.npy'.format(phase)))
+
+        data[phase]['images'] = np.load(os.path.join(f"./data/{P['dataset']}", 'formatted_{}_images.npy'.format(phase)))
         data[phase]['feats'] = np.load(P['{}_feats_file'.format(phase)]) if P['use_feats'] else []
     return data
 
